@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nails & Beauty Alla · Cham</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #faf7f5;  /* очень светлый бежевый из вашего PDF */
+            color: #2e2e2e;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+            padding: 3rem 2.5rem;
+        }
+
+        /* переключатель языков — тонко и чисто */
+        .lang-switch {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            color: #9b8c85;
+        }
+
+        .lang-switch span {
+            cursor: pointer;
+            transition: color 0.15s;
+            font-weight: 400;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+
+        .lang-switch span.active {
+            color: #6b4f42;
+            border-bottom: 1px solid #c7b5ab;
+        }
+
+        /* логотип + имя */
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-image {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 0.75rem;
+        }
+
+        .studio-name {
+            font-size: 1.8rem;
+            font-weight: 350;
+            letter-spacing: 1px;
+            color: #4a3f3a;
+            border-bottom: 1px solid #e0d6d0;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            color: #8f7a70;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0.25rem;
+        }
+
+        /* Основной текстовый блок (меняется с языком) */
+        .main-message {
+            margin: 2.5rem 0 2rem;
+            text-align: center;
+            min-height: 110px; /* чтобы при переключении не прыгало */
+        }
+
+        .main-message p {
+            font-size: 1.2rem;
+            color: #3f3530;
+            max-width: 500px;
+            margin: 0 auto 0.5rem;
+            font-weight: 350;
+        }
+
+        .main-message .light {
+            color: #7f6e66;
+            font-size: 0.95rem;
+        }
+
+        /* главная кнопка — именно на truvuna */
+        .booking-button {
+            display: inline-block;
+            background-color: #6b4f42;   /* спокойный коричневатый */
+            color: white;
+            text-decoration: none;
+            padding: 1rem 3rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            border: none;
+            transition: background-color 0.2s;
+            margin: 1rem 0 2rem;
+            font-weight: 400;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .booking-button:hover {
+            background-color: #4f3c33;
+        }
+
+        /* контактные строки */
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 2.5rem;
+            margin: 1.8rem 0 1.5rem;
+            font-size: 1rem;
+            color: #3f3530;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* иконки очень тонкие, подойдут */
+        .icon {
+            opacity: 0.7;
+            width: 18px;
+            text-align: center;
+        }
+
+        .address, .hours {
+            color: #5b4d45;
+            font-size: 0.95rem;
+        }
+
+        .hours-detail {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0.75rem 0;
+            color: #4c403a;
+            font-size: 0.95rem;
+        }
+
+        .instagram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #6b4f42;
+            text-decoration: none;
+            border-bottom: 1px solid #d9cdc5;
+            padding-bottom: 1px;
+        }
+
+        .instagram-link:hover {
+            border-bottom: 1px solid #6b4f42;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #eae1db;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .footer-small {
+            font-size: 0.8rem;
+            color: #a99990;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        /* контент для разных языков — скрыт/показан */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- переключатель языков -->
+    <div class="lang-switch">
+        <span id="lang-de" class="active" onclick="switchLang('de')">DE</span>
+        <span id="lang-en" onclick="switchLang('en')">EN</span>
+        <span id="lang-ru" onclick="switchLang('ru')">RU</span>
+    </div>
+
+    <!-- логотип (можно заменить, но пока текстовый вариант) -->
+    <div class="logo-wrapper">
+        <!-- если позже захотите вставить img, замените эту строку -->
+        <div class="studio-name">Nails & Beauty Alla</div>
+        <div class="tagline">Cham · Zugerstrasse 78</div>
+    </div>
+
+    <!-- БЛОК ДЛЯ НЕМЕЦКОГО (DE) -->
+    <div id="content-de" class="lang-content active">
+        <div class="main-message">
+            <p>Unsere Website wird überarbeitet.</p>
+            <p class="light">Bis dahin buchen Sie einfach online:</p>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://www.truvuna.ch/en/d/beauty-and-wellness/beauticians/nails-and-beauty-alla-d:qEhkSK3PV" class="booking-button" target="_blank">Termin vereinbaren</a>
+        </div>
+        <div class="contact-row">
+            <span class="contact-item"><span class="icon">📞</span> +41 76 429 18 81</span>
+            <span class="contact-item"><span class="icon">✉️</span> alladiadora@gmail.com</span>
+        </div>
+        <div class="hours-detail">
+            <span>Mo–Fr  9:00 – 20:00</span>
+            <span>Sa  9:00 – 16:00</span>
+        </div>
+    </div>
+
+    <!-- БЛОК ДЛЯ АНГЛИЙСКОГО (EN) -->
+    <div id="content-en" class="lang-content">
+        <div class="main-message">
+            <p>Our website is being updated.</p>
+            <p class="light">In the meantime, please book online:</p>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://www.truvuna.ch/en/d/beauty-and-wellness/beauticians/nails-and-beauty-alla-d:qEhkSK3PV" class="booking-button" target="_blank">Book an appointment</a>
+        </div>
+        <div class="contact-row">
+            <span class="contact-item"><span class="icon">📞</span> +41 76 429 18 81</span>
+            <span class="contact-item"><span class="icon">✉️</span> alladiadora@gmail.com</span>
+        </div>
+        <div class="hours-detail">
+            <span>Mon–Fri  9:00 – 20:00</span>
+            <span>Sat  9:00 – 16:00</span>
+        </div>
+    </div>
+
+    <!-- БЛОК ДЛЯ РУССКОГО (RU) -->
+    <div id="content-ru" class="lang-content">
+        <div class="main-message">
+            <p>Сайт временно обновляется.</p>
+            <p class="light">Записаться можно онлайн:</p>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://www.truvuna.ch/en/d/beauty-and-wellness/beauticians/nails-and-beauty-alla-d:qEhkSK3PV" class="booking-button" target="_blank">Записаться на приём</a>
+        </div>
+        <div class="contact-row">
+            <span class="contact-item"><span class="icon">📞</span> +41 76 429 18 81</span>
+            <span class="contact-item"><span class="icon">✉️</span> alladiadora@gmail.com</span>
+        </div>
+        <div class="hours-detail">
+            <span>Пн–Пт  9:00 – 20:00</span>
+            <span>Сб  9:00 – 16:00</span>
+        </div>
+    </div>
+
+    <!-- Адрес и Instagram, едины для всех языков -->
+    <hr>
+    <div style="text-align: center; margin-bottom: 1.5rem; color: #4f3f38;">
+        <div>Zugerstrasse 78, 6300 Cham, Schweiz</div>
+        <div style="margin-top: 0.5rem;">
+            <a href="https://www.instagram.com/alla.nailsandbeauty/" target="_blank" class="instagram-link">
+                <span class="icon">📷</span> @alla.nailsandbeauty
+            </a>
+        </div>
+    </div>
+    <div class="footer-small">
+        © Nails & Beauty Alla · Imprint
+    </div>
+
+</div>
+
+<!-- простой js для переключения языков -->
+<script>
+    function switchLang(lang) {
+        // скрыть все блоки
+        document.getElementById('content-de').classList.remove('active');
+        document.getElementById('content-en').classList.remove('active');
+        document.getElementById('content-ru').classList.remove('active');
+        // показать выбранный
+        document.getElementById('content-' + lang).classList.add('active');
+
+        // подсветка переключателя
+        document.getElementById('lang-de').classList.remove('active');
+        document.getElementById('lang-en').classList.remove('active');
+        document.getElementById('lang-ru').classList.remove('active');
+        document.getElementById('lang-' + lang).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
